@@ -2,15 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import * as firebase from 'firebase/app';
+import { initializeApp } from "firebase/app"
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RedirectComponent } from './redirect/redirect.component';
+import { MainComponent } from './main/main.component';
 
-const app = firebase.initializeApp(environment.firebaseConfig);
+const app = initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RedirectComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
