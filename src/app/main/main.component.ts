@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirestoreData } from 'src/services/firestore-data';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +16,7 @@ export class MainComponent implements OnInit {
   });
 
   Message: string = "";
+  newURL: string = ""
 
   constructor(private firestore: FirestoreData) { }
 
@@ -28,9 +30,9 @@ export class MainComponent implements OnInit {
     let sURL: string = this.form.get("sURL").value
 
     this.firestore.saveRedirect(sURL, lURL).then(data => {
-      console.log(data)
       this.Message = "Verlinkung erfolgreich gespeichert"
       setTimeout(() => this.Message = "", 3000);
+      this.newURL = environment.url + sURL;
       this.form.get("sURL").setValue("");
       this.form.get("lURL").setValue("");
     }).catch(data => {
