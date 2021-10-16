@@ -26,7 +26,7 @@ export class RedirectComponent implements OnInit {
 
   async redirect(sURL: string) {
     this.firestore.getRedirect(sURL).then(data => {
-    if (data.lURL.substring(0, 3) != "www" && data.lURL.substring(0, 4) != "http" && data.lURL.substring(0,5) != "https") {
+    if (data.lURL.substring(0, 4) != "http" && data.lURL.substring(0,5) != "https") {
      window.location.href = "//"+data.lURL;
     } else {
       window.location.href = data.lURL;
