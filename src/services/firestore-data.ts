@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Redirect } from "src/model/redirect";
-import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
+import { getFirestore, collection, where, query, getDocs, addDoc } from "firebase/firestore";
 
 @Injectable({providedIn: 'root'})
 export class FirestoreData
@@ -13,15 +13,29 @@ export class FirestoreData
         return new Promise<any>(async (resolve, reject) => {
             const q = query(collection(this.db, "redirects"), where("sURL", "==", sURL));
             const querySnapshot = await getDocs(q);
-            let data;
+            
             querySnapshot.forEach((doc) => {
-                data = doc.data() as Redirect
-            });
-            if (data) {
+                let data = doc.data() as Redirect
                 resolve(data);
+            });
+            reject("keine Verlinkung vorhanden");
+        });
+    }
+
+    saveRedirect(sURL: string, lURL: string): Promise<any> {
+        return new Promise<any>(async (resolve, reject) => {
+            const q = query(collection(this.db, "redirects"), where("sURL", "==", sURL));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                await addDoc(collection(this.db, "redirects"), {
+                    sURL: sURL,
+                    lURL: lURL
+                });
+                resolve("success");
             }
-            else{
-                reject("keine Verlinkung vorhanden");
+            else {
+                reject("ID already in Use");
             }
         });
     }

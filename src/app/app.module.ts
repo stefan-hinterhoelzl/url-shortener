@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RedirectComponent } from './redirect/redirect.component';
 import { MainComponent } from './main/main.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -19,7 +20,8 @@ const app = initializeApp(environment.firebaseConfig);
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
