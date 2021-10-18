@@ -1,5 +1,23 @@
-<p>{{Message}}</p>
+<div *ngIf = "error == false" class = "main-wrapper" fxLayout = "row" fxLayoutAlign = "center center">
+    <mat-card class = "box">
+        <mat-card-header>
+            <mat-card-title>Shortify-Verlinkung</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p *ngIf = "ShowInfo != null"> {{url}}{{ShowInfo.sURL}}</p>
+            <p> verlinkt auf</p>
+            <p style = "word-wrap: break-word;" *ngIf = "ShowInfo != null"> {{ShowInfo.lURL}}</p>
+            <mat-divider></mat-divider>
+            <p style = "font-size: small" *ngIf = "ShowInfo != null"> erstellt am: {{ShowInfo.timestamp.toMillis() | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
+        </mat-card-content>  
+    </mat-card>
+</div>
 
-<p *ngIf = "ShowInfo != null"> {{ShowInfo.lURL}}</p>
-<p *ngIf = "ShowInfo != null"> {{ShowInfo.sURL}}</p>
-<p *ngIf = "ShowInfo != null"> erstellt am: {{ShowInfo.timestamp.toMillis() | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
+
+<div *ngIf = "error == true"  class = "main-wrapper" fxLayout = "row" fxLayoutAlign = "center center">
+    <mat-card class = "box">
+        <mat-card-header>
+            <mat-card-title>Verlinkung existiert nicht</mat-card-title>
+        </mat-card-header>
+    </mat-card> 
+</div>

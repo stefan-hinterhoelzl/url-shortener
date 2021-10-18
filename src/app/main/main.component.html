@@ -1,24 +1,17 @@
-<h2>URL Shortener:</h2>
-
-<form [formGroup] = "form" (ngSubmit) = "onSubmit()">
-    <p>
-        <label>URL:</label>
-        <input type="text" formControlName = "lURL">
-    </p>
-
-    <p>
-        <label>Short ID:</label>
-        <input type="text" formControlName = "sURL">
-        
-    </p>
-
-    <p>
-        <button type = "submit" [disabled] = "!form.valid">Speichern</button>
-    </p>
-</form>
-<button (click) = "Generate()">Short ID generieren</button>
-<p>{{newURL}}</p>
-<p>{{Message}}</p>
-
-
-<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+<div class = "main-wrapper" fxLayout = "row" fxLayoutAlign = "center center">
+    <mat-card class = "box">
+        <mat-card-header>
+            <mat-card-title>Shortify</mat-card-title>
+        </mat-card-header>
+        <form class = "example-form" [formGroup] = "form">
+            <mat-card-content>
+                <mat-form-field class = "example-full-width" appearance = "outline">
+                    <mat-label>URL</mat-label>
+                    <input matInput formControlName = "lURL">
+                </mat-form-field>
+            </mat-card-content>  
+        </form>
+        <button *ngIf = "created == false"  mat-raised-button color = "primary" (click) = "onSubmit()" [disabled] = "!form.valid">Link verkürzen</button>
+        <button *ngIf = "created == true"  mat-raised-button color = "primary" [cdkCopyToClipboard] = "newURL" (click) = "reset()" [disabled] = "!form.valid">Link kopieren</button>
+    </mat-card>
+</div>

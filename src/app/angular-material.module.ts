@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 import { PortalModule } from '@angular/cdk/portal';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -71,7 +72,8 @@ const materialModules = [
   MatDatepickerModule,
   MatTooltipModule,
   MatDialogModule,
-  MatSliderModule
+  MatSliderModule,
+  ClipboardModule,
 ];
 
 @NgModule({

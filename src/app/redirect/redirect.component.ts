@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Redirect } from 'src/model/redirect';
 import { FirestoreData } from 'src/services/firestore-data';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-redirect',
@@ -10,8 +11,9 @@ import { FirestoreData } from 'src/services/firestore-data';
 })
 export class RedirectComponent implements OnInit {
 
-  Message: string = ""
+  error: boolean = false;;
   ShowInfo: Redirect;
+  url: string = environment.url;
 
 
   constructor(private firestore: FirestoreData, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -38,7 +40,7 @@ export class RedirectComponent implements OnInit {
       window.location.href = data.lURL;
     }
     }).catch(data => {
-      this.Message = "Diese Verlinkung existiert nicht"
+      this.error = true;
     });
   }
 
@@ -46,7 +48,7 @@ export class RedirectComponent implements OnInit {
     this.firestore.getRedirect(sURL.substring(0, sURL.length-1)).then(data => {
       this.ShowInfo = data;
     }).catch(data => {
-      this.Message = "Diese Verlinkung existiert nicht"
+      this.error = true;
     });
   }
 

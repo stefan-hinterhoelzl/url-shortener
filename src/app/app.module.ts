@@ -9,6 +9,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { MainComponent } from './main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -23,7 +24,8 @@ const app = initializeApp(environment.firebaseConfig);
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
