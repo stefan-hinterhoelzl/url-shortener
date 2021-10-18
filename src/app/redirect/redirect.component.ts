@@ -11,15 +11,21 @@ import { FirestoreData } from 'src/services/firestore-data';
 export class RedirectComponent implements OnInit {
 
   Message: string = ""
+  ShowInfo: Redirect;
 
 
-  constructor(private firestore: FirestoreData, private router: Router) { }
+  constructor(private firestore: FirestoreData, private router: Router, private activatedRoute: ActivatedRoute) { }
 
 
 
   ngOnInit() {
-    let sURL = this.router.url.substring(1);
-    this.redirect(sURL);
+    let sURL = this.activatedRoute.snapshot.paramMap.get("id");
+    if (sURL.charAt(sURL.length-1) == '+') {
+      console.log(sURL)
+      this.showInfo(sURL);
+    } else {
+      this.redirect(sURL);
+    }
   }
 
 
@@ -31,6 +37,14 @@ export class RedirectComponent implements OnInit {
     } else {
       window.location.href = data.lURL;
     }
+    }).catch(data => {
+      this.Message = "Diese Verlinkung existiert nicht"
+    });
+  }
+
+  async showInfo(sURL: string) {
+    this.firestore.getRedirect(sURL.substring(0, sURL.length-1)).then(data => {
+      this.ShowInfo = data;
     }).catch(data => {
       this.Message = "Diese Verlinkung existiert nicht"
     });

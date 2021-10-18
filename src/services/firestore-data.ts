@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Redirect } from "src/model/redirect";
-import { getFirestore, collection, where, query, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore, collection, where, query, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 
 @Injectable({providedIn: 'root'})
 export class FirestoreData
@@ -30,7 +30,8 @@ export class FirestoreData
             if (querySnapshot.empty) {
                 await addDoc(collection(this.db, "redirects"), {
                     sURL: sURL,
-                    lURL: lURL
+                    lURL: lURL,
+                    timestamp: serverTimestamp()
                 });
                 resolve("success");
             }

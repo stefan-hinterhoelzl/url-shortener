@@ -1,1 +1,5 @@
 <p>{{Message}}</p>
+
+<p *ngIf = "ShowInfo != null"> {{ShowInfo.lURL}}</p>
+<p *ngIf = "ShowInfo != null"> {{ShowInfo.sURL}}</p>
+<p *ngIf = "ShowInfo != null"> erstellt am: {{ShowInfo.timestamp.toMillis() | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
