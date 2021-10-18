@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RedirectComponent implements OnInit {
 
-  error: boolean = false;;
+  error: boolean = false;
+  showinfo: boolean = false;
   ShowInfo: Redirect;
   url: string = environment.url;
 
@@ -45,6 +46,7 @@ export class RedirectComponent implements OnInit {
   }
 
   async showInfo(sURL: string) {
+    this.showinfo = true;
     this.firestore.getRedirect(sURL.substring(0, sURL.length-1)).then(data => {
       this.ShowInfo = data;
     }).catch(data => {
