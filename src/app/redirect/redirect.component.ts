@@ -46,8 +46,8 @@ export class RedirectComponent implements OnInit {
   }
 
   async showInfo(sURL: string) {
-    this.showinfo = true;
     this.firestore.getRedirect(sURL.substring(0, sURL.length-1)).then(data => {
+      this.showinfo = true;
       this.ShowInfo = data;
     }).catch(data => {
       this.error = true;
